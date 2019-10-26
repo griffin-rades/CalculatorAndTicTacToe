@@ -9,8 +9,8 @@
 import UIKit
 
 class CalcViewController: UIViewController {
-    var distance = 20
-    var button:UIButton!
+    
+    var buttonsList: [[UIButton]] = [[UIButton]]()
     var buttonNames: [[String]] = [["Clear","Negate","%","/"],
                                    ["7","8","9","X"],
                                    ["4","5","6","-"],
@@ -20,9 +20,43 @@ class CalcViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setUpScreen()
         view.backgroundColor = .blue
     }
     
+    func setUpScreen(){
+        for k in 0..<buttonNames.count{
+            for x in 0..<buttonNames[k].count{
+                var currentButton = UIButton()
+                currentButton = createButtons(buttonTitle: buttonNames[k][x])
+                
+                buttonsList.append([currentButton])
+                
+                addButtonsToScreen(button: buttonsList[k][x])
+            }
+        }
+    }
+    
+    func addButtonsToScreen(button: UIButton){
+        view.addSubview(button)
+        setButtonContraints(button: button, offset: 20)
+    }
+    
+    func createButtons(buttonTitle: String) -> UIButton{
+        let createdButton = UIButton()
+          
+        createdButton.setTitle(" " + buttonTitle + " ", for: .normal)
+        createdButton.backgroundColor = .black
+        return createdButton
+    }
+    
+    func setButtonContraints(button: UIButton, offset: CGFloat){
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(offset)).isActive = true
+        //button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-offset)).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
 }
 
 
