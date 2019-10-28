@@ -81,43 +81,18 @@ class CalcViewController: UIViewController {
     }
     
     func setButtonContraints(button: UIButton, leadingConstant: CGFloat, heightConsant: CGFloat){
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingConstant).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        button.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        button.topAnchor.constraint(equalTo: view.topAnchor, constant: heightConsant).isActive = true
-        //button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        if buttonsList[18] != button{
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingConstant).isActive = true
+                button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+                button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: heightConsant).isActive = true
+        }else{
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingConstant).isActive = true
+                button.widthAnchor.constraint(equalToConstant: 180).isActive = true
+                button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: heightConsant).isActive = true
+        }
     }
 }
-
-
-
-//Testing button creation and loactions.
-//    func createButton(){
-//        button = UIButton()
-//        button.setTitleColor(.red, for: .normal)
-//        button.backgroundColor = .white
-//        button.setTitle(" " + buttonNames[0][0] + " ", for: .normal)
-//
-//        view.addSubview(button)
-//        setButtonContraints()
-//    }
-//
-//    func setButtonContraints(){
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(distance)).isActive = true
-//        //button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-//        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//
-//    }
-//    func printArray(){
-//        for var k in 0..<buttonNames.count{
-//            for var x in 0..<buttonNames[k].count{
-//                print(buttonNames[k][x])
-//            }
-//        }
-//    }
-
-
