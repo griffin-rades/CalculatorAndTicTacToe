@@ -36,6 +36,15 @@ class CalcViewController: UIViewController {
         }
     }
     
+    func createButtons(buttonTitle: String) -> UIButton{
+        let createdButton = UIButton()
+             
+        createdButton.setTitle(" " + buttonTitle + " ", for: .normal)
+        createdButton.backgroundColor = .black
+        
+        return createdButton
+    }
+    
     func addButtonsToScreen(){
         var offsetXR1 = CGFloat(20)
         var offsetXR2 = CGFloat(20)
@@ -43,6 +52,7 @@ class CalcViewController: UIViewController {
         var offsetXR4 = CGFloat(20)
         var offsetXR5 = CGFloat(20)
         var offsetY = CGFloat(400)
+        
         for k in 0..<buttonsList.count{
             if k < 4{
                 view.addSubview(buttonsList[k])
@@ -70,14 +80,6 @@ class CalcViewController: UIViewController {
                 offsetXR5 += 100
             }
         }
-    }
-    
-    func createButtons(buttonTitle: String) -> UIButton{
-        let createdButton = UIButton()
-          
-        createdButton.setTitle(" " + buttonTitle + " ", for: .normal)
-        createdButton.backgroundColor = .black
-        return createdButton
     }
     
     func setButtonContraints(button: UIButton, leadingConstant: CGFloat, heightConsant: CGFloat){
