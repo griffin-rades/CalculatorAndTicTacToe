@@ -11,7 +11,8 @@ import UIKit
 class CalcViewController: UIViewController {
     
     var buttonsList = [UIButton]()
-    var buttonNames: [[String]] = [["Clear","Negate","%","/"],
+    var calculatorLabel = UILabel()
+    var buttonNames: [[String]] = [["Clear","+/-","%","/"],
                                    ["7","8","9","X"],
                                    ["4","5","6","-"],
                                    ["1","2","3","+"],
@@ -22,25 +23,39 @@ class CalcViewController: UIViewController {
         // Do any additional setup after loading the view.
         createButtonList()
         addButtonsToScreen()
-        view.backgroundColor = .blue
+        createLabel()
+        view.backgroundColor = .white
     }
     
+    func createLabel(){
+        calculatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.calculatorLabel.text = "Calculator"
+        self.view.addSubview(calculatorLabel)
+        self.calculatorLabel.backgroundColor = .white
+        self.calculatorLabel.textAlignment = .right
+        self.calculatorLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.calculatorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
+        self.calculatorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        self.calculatorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        
+    }
     func createButtonList(){
-        for k in 0..<buttonNames.count{
-            for x in 0..<buttonNames[k].count{
+        for k in 0..<self.buttonNames.count{
+            for x in 0..<self.buttonNames[k].count{
                 var currentButton = UIButton()
-                currentButton = createButtons(buttonTitle: buttonNames[k][x])
+                currentButton = createButtons(buttonTitle: self.buttonNames[k][x])
                 
-                buttonsList.append(currentButton)
+                self.buttonsList.append(currentButton)
             }
         }
     }
     
     func createButtons(buttonTitle: String) -> UIButton{
-        let createdButton = UIButton()
-             
+        let createdButton = UIButton(type: .system)
+        
+        createdButton.setTitleColor(.white, for: .normal)
         createdButton.setTitle(" " + buttonTitle + " ", for: .normal)
-        createdButton.backgroundColor = .black
+        createdButton.backgroundColor = .gray
         
         return createdButton
     }
@@ -53,30 +68,30 @@ class CalcViewController: UIViewController {
         var offsetXR5 = CGFloat(20)
         var offsetY = CGFloat(400)
         
-        for k in 0..<buttonsList.count{
+        for k in 0..<self.buttonsList.count{
             if k < 4{
-                view.addSubview(buttonsList[k])
-                setButtonContraints(button: buttonsList[k], leadingConstant: offsetXR1, heightConsant: offsetY)
+                self.view.addSubview(buttonsList[k])
+                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR1, heightConsant: offsetY)
                 offsetXR1 += 100
             }else if k >= 4 && k < 8{
                 offsetY = 470
-                view.addSubview(buttonsList[k])
-                setButtonContraints(button: buttonsList[k], leadingConstant: offsetXR2, heightConsant: offsetY)
+                self.view.addSubview(buttonsList[k])
+                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR2, heightConsant: offsetY)
                 offsetXR2 += 100
             }else if k >= 8 && k < 12{
                 offsetY = 540
-                view.addSubview(buttonsList[k])
-                setButtonContraints(button: buttonsList[k], leadingConstant: offsetXR3, heightConsant: offsetY)
+                self.view.addSubview(buttonsList[k])
+                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR3, heightConsant: offsetY)
                 offsetXR3 += 100
             } else if k >= 12 && k < 16{
                 offsetY = 610
-                view.addSubview(buttonsList[k])
-                setButtonContraints(button: buttonsList[k], leadingConstant: offsetXR4, heightConsant: offsetY)
+                self.view.addSubview(buttonsList[k])
+                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR4, heightConsant: offsetY)
                 offsetXR4 += 100
             } else{
                 offsetY = 680
-                view.addSubview(buttonsList[k])
-                setButtonContraints(button: buttonsList[k], leadingConstant: offsetXR5, heightConsant: offsetY)
+                self.view.addSubview(buttonsList[k])
+                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR5, heightConsant: offsetY)
                 offsetXR5 += 100
             }
         }
