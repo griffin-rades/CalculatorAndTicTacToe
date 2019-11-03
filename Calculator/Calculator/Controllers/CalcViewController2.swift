@@ -13,6 +13,8 @@ class CalcViewController2: UIViewController {
     var buttonDictionary = [String:Any]()
     var calculatorLabel = UILabel()
     var calculatorButtonsArray: [CalcButtons] = []
+    var currentScreenNumber = 0.0
+    var previousScreenNumber = 0.0
     
     override func loadView() {
         super.loadView()
@@ -20,7 +22,7 @@ class CalcViewController2: UIViewController {
         let buttonNumbers = ["Clear","Negate","0","1","2","3","4","5","6","7","8","9"]
         let operationButtons = ["X","%","/","+","-",".","="]
         
-        self.calculatorLabel.text = "Calculator Label"
+        self.calculatorLabel.text = ""
         self.calculatorLabel.textAlignment = .right
         self.calculatorLabel.backgroundColor = .white
         self.buttonDictionary["Label"] = self.calculatorLabel
@@ -34,6 +36,7 @@ class CalcViewController2: UIViewController {
             x.calculatorButton?.setTitle(x.buttonLabel, for: .normal)
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
+            x.calculatorButton?.addTarget(self, action: #selector(numberClicked), for: .touchUpInside)
             x.calculatorButton?.titleLabel?.adjustsFontSizeToFitWidth = true
             
             self.calculatorButtonsArray.append(x)
@@ -47,6 +50,7 @@ class CalcViewController2: UIViewController {
             x.calculatorButton?.setTitle(x.buttonLabel, for: .normal)
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
+            x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
             x.calculatorButton?.titleLabel?.adjustsFontSizeToFitWidth = true
             
             self.calculatorButtonsArray.append(x)
@@ -60,7 +64,59 @@ class CalcViewController2: UIViewController {
 
         self.view.backgroundColor = .white
     }
-    
+    @objc func numberClicked(_ sender: UIButton){
+        if let buttonTitle = sender.titleLabel?.text{
+  //          print(buttonTitle)
+            if buttonTitle == "Clear"{
+                self.calculatorLabel.text = ""
+                self.calculatorLabel.text = ""
+                self.currentScreenNumber = 0.0
+                self.previousScreenNumber = 0.0
+            }else if buttonTitle == "Negate"{
+                if self.calculatorLabel.text != ""{
+                    if self.calculatorLabel.text?.prefix(1) == "-"{
+                        self.calculatorLabel.text?.remove(at: self.calculatorLabel.text!.startIndex)
+                    }else{
+                        self.calculatorLabel.text = "-" + self.calculatorLabel.text!
+                    }
+                }
+            }else{
+                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+"{
+                    self.calculatorLabel.text! = buttonTitle
+                }else{
+                    self.calculatorLabel.text! += buttonTitle
+                }
+            }
+        }
+    }
+    @objc func operationClicked(_ sender: UIButton){
+        if let buttonTitle = sender.titleLabel?.text{
+            previousScreenNumber = Double(self.calculatorLabel.text!)!
+            if buttonTitle == "/"{
+                self.calculatorLabel.text = "/"
+            }else if buttonTitle == "X"{
+                self.calculatorLabel.text = "X"
+            }else if buttonTitle == "-"{
+                self.calculatorLabel.text = "-"
+            }else if buttonTitle == "+"{
+                self.calculatorLabel.text = "+"
+            }else if buttonTitle == "%"{
+                self.calculatorLabel.text = "%"
+            }else if buttonTitle == "="{
+                if buttonTitle == "/"{
+                    
+                }else if buttonTitle == "X"{
+                        
+                }else if buttonTitle == "-"{
+                        
+                }else if buttonTitle == "+"{
+                
+                }else if buttonTitle == "%"{
+                        
+                }
+            }
+        }
+    }
     func addButtonConstraints(){
         view.addSubview(calculatorLabel)
         calculatorLabel.translatesAutoresizingMaskIntoConstraints = false
