@@ -146,8 +146,14 @@ class CalcViewController: UIViewController {
                 }else if operation == "+"{ //addition
                     self.totalValue = self.previousScreenNumber + self.currentScreenNumber
                 }
-                //set the calculator label to the value of totalValue
-                self.calculatorLabel.text = String(self.totalValue)
+            //set the calculator label to the value of totalValue
+            self.calculatorLabel.text = String(self.totalValue)
+            }else if buttonTitle == "."{ //if decimal point clicked
+                if (self.calculatorLabel.text?.contains("."))!{ //if the label alread is a decimal do nothing
+                    
+                }else{ //add a decimal point
+                    self.calculatorLabel.text! += "."
+                }
             }
         }
     }
