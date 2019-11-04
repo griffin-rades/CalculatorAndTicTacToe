@@ -15,6 +15,8 @@ class CalcViewController2: UIViewController {
     var calculatorButtonsArray: [CalcButtons] = []
     var currentScreenNumber = 0.0
     var previousScreenNumber = 0.0
+    var totalValue = 0.0
+    var operation = ""
     
     override func loadView() {
         super.loadView()
@@ -25,6 +27,7 @@ class CalcViewController2: UIViewController {
         self.calculatorLabel.text = ""
         self.calculatorLabel.textAlignment = .right
         self.calculatorLabel.backgroundColor = .white
+        self.calculatorLabel.font = self.calculatorLabel.font.withSize(20)
         self.buttonDictionary["Label"] = self.calculatorLabel
         
         for i in buttonNumbers{
@@ -37,7 +40,7 @@ class CalcViewController2: UIViewController {
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
             x.calculatorButton?.addTarget(self, action: #selector(numberClicked), for: .touchUpInside)
-            x.calculatorButton?.titleLabel?.adjustsFontSizeToFitWidth = true
+            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
             
             self.calculatorButtonsArray.append(x)
             self.buttonDictionary[x.title!] = x.calculatorButton
@@ -51,7 +54,7 @@ class CalcViewController2: UIViewController {
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
             x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
-            x.calculatorButton?.titleLabel?.adjustsFontSizeToFitWidth = true
+            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
             
             self.calculatorButtonsArray.append(x)
             self.buttonDictionary["SC" + String(i)] = x.calculatorButton
@@ -66,12 +69,13 @@ class CalcViewController2: UIViewController {
     }
     @objc func numberClicked(_ sender: UIButton){
         if let buttonTitle = sender.titleLabel?.text{
-  //          print(buttonTitle)
+            //print(buttonTitle)
             if buttonTitle == "Clear"{
                 self.calculatorLabel.text = ""
                 self.calculatorLabel.text = ""
                 self.currentScreenNumber = 0.0
                 self.previousScreenNumber = 0.0
+                self.totalValue = 0.0
             }else if buttonTitle == "Negate"{
                 if self.calculatorLabel.text != ""{
                     if self.calculatorLabel.text?.prefix(1) == "-"{
@@ -91,29 +95,41 @@ class CalcViewController2: UIViewController {
     }
     @objc func operationClicked(_ sender: UIButton){
         if let buttonTitle = sender.titleLabel?.text{
-            previousScreenNumber = Double(self.calculatorLabel.text!)!
+            //print(buttonTitle)
             if buttonTitle == "/"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
                 self.calculatorLabel.text = "/"
+                operation = "/"
             }else if buttonTitle == "X"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
                 self.calculatorLabel.text = "X"
+                operation = "X"
             }else if buttonTitle == "-"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
                 self.calculatorLabel.text = "-"
+                operation = "-"
             }else if buttonTitle == "+"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
                 self.calculatorLabel.text = "+"
+                operation = "+"
             }else if buttonTitle == "%"{
-                self.calculatorLabel.text = "%"
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.totalValue = previousScreenNumber / 100
+                self.calculatorLabel.text = String(self.totalValue)
+                operation = "%"
             }else if buttonTitle == "="{
-                if buttonTitle == "/"{
-                    
-                }else if buttonTitle == "X"{
-                        
-                }else if buttonTitle == "-"{
-                        
-                }else if buttonTitle == "+"{
-                
-                }else if buttonTitle == "%"{
-                        
+                currentScreenNumber = Double(self.calculatorLabel.text!)!
+                if operation == "/"{
+                    self.totalValue = self.previousScreenNumber / self.currentScreenNumber
+                }else if operation == "X"{
+                    self.totalValue = self.previousScreenNumber * self.currentScreenNumber
+                }else if operation == "-"{
+                    self.totalValue = self.previousScreenNumber - self.currentScreenNumber
+                }else if operation == "+"{
+                    self.totalValue = self.previousScreenNumber + self.currentScreenNumber
                 }
+                
+                self.calculatorLabel.text = String(self.totalValue)
             }
         }
     }
