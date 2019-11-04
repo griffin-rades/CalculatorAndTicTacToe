@@ -10,106 +10,164 @@ import UIKit
 
 class CalcViewController: UIViewController {
     
-    var buttonsList = [UIButton]()
+    var buttonDictionary = [String:Any]()
     var calculatorLabel = UILabel()
-    var buttonNames: [[String]] = [["Clear","+/-","%","/"],
-                                   ["7","8","9","X"],
-                                   ["4","5","6","-"],
-                                   ["1","2","3","+"],
-                                   ["0",".","="]]
+    var calculatorButtonsArray: [CalcButtons] = []
+    var currentScreenNumber = 0.0
+    var previousScreenNumber = 0.0
+    var totalValue = 0.0
+    var operation = ""
+    
+    override func loadView() {
+        super.loadView()
+        
+        let buttonNumbers = ["Clear","Negate","0","1","2","3","4","5","6","7","8","9"]
+        let operationButtons = ["X","%","/","+","-",".","="]
+        
+        self.calculatorLabel.text = ""
+        self.calculatorLabel.textAlignment = .right
+        self.calculatorLabel.backgroundColor = .white
+        self.calculatorLabel.font = self.calculatorLabel.font.withSize(20)
+        self.buttonDictionary["Label"] = self.calculatorLabel
+        
+        for i in buttonNumbers{
+            let x = CalcButtons()
+            
+            x.buttonLabel = i
+            x.title = "n" + i
+            x.calculatorButton = UIButton(type: .system)
+            x.calculatorButton?.setTitle(x.buttonLabel, for: .normal)
+            x.calculatorButton?.backgroundColor = .gray
+            x.calculatorButton?.setTitleColor(.white, for: .normal)
+            x.calculatorButton?.addTarget(self, action: #selector(numberClicked), for: .touchUpInside)
+            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
+            
+            self.calculatorButtonsArray.append(x)
+            self.buttonDictionary[x.title!] = x.calculatorButton
+        }
+        for i in 0..<operationButtons.count{
+            let x = CalcButtons()
+            
+            x.buttonLabel = operationButtons[i]
+            x.calculatorButton = UIButton(type: .system)
+            x.calculatorButton?.setTitle(x.buttonLabel, for: .normal)
+            x.calculatorButton?.backgroundColor = .gray
+            x.calculatorButton?.setTitleColor(.white, for: .normal)
+            x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
+            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
+            
+            self.calculatorButtonsArray.append(x)
+            self.buttonDictionary["SC" + String(i)] = x.calculatorButton
+        }
+        addButtonConstraints()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        createButtonList()
-        addButtonsToScreen()
-        createLabel()
-        view.backgroundColor = .white
+
+        self.view.backgroundColor = .white
     }
-    
-    func createLabel(){
-        calculatorLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.calculatorLabel.text = "Calculator"
-        self.view.addSubview(calculatorLabel)
-        self.calculatorLabel.backgroundColor = .white
-        self.calculatorLabel.textAlignment = .right
-        self.calculatorLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        self.calculatorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
-        self.calculatorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        self.calculatorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-        
+    @objc func numberClicked(_ sender: UIButton){
+        if let buttonTitle = sender.titleLabel?.text{
+            //print(buttonTitle)
+            if buttonTitle == "Clear"{
+                self.calculatorLabel.text = ""
+                self.calculatorLabel.text = ""
+                self.currentScreenNumber = 0.0
+                self.previousScreenNumber = 0.0
+                self.totalValue = 0.0
+            }else if buttonTitle == "Negate"{
+                if self.calculatorLabel.text != ""{
+                    if self.calculatorLabel.text?.prefix(1) == "-"{
+                        self.calculatorLabel.text?.remove(at: self.calculatorLabel.text!.startIndex)
+                    }else{
+                        self.calculatorLabel.text = "-" + self.calculatorLabel.text!
+                    }
+                }
+            }else{
+                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+"{
+                    self.calculatorLabel.text! = buttonTitle
+                }else{
+                    self.calculatorLabel.text! += buttonTitle
+                }
+            }
+        }
     }
-    func createButtonList(){
-        for k in 0..<self.buttonNames.count{
-            for x in 0..<self.buttonNames[k].count{
-                var currentButton = UIButton()
-                currentButton = createButtons(buttonTitle: self.buttonNames[k][x])
+    @objc func operationClicked(_ sender: UIButton){
+        if let buttonTitle = sender.titleLabel?.text{
+            //print(buttonTitle)
+            if buttonTitle == "/"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.calculatorLabel.text = "/"
+                operation = "/"
+            }else if buttonTitle == "X"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.calculatorLabel.text = "X"
+                operation = "X"
+            }else if buttonTitle == "-"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.calculatorLabel.text = "-"
+                operation = "-"
+            }else if buttonTitle == "+"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.calculatorLabel.text = "+"
+                operation = "+"
+            }else if buttonTitle == "%"{
+                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                self.totalValue = previousScreenNumber / 100
+                self.calculatorLabel.text = String(self.totalValue)
+                operation = "%"
+            }else if buttonTitle == "="{
+                currentScreenNumber = Double(self.calculatorLabel.text!)!
+                if operation == "/"{
+                    self.totalValue = self.previousScreenNumber / self.currentScreenNumber
+                }else if operation == "X"{
+                    self.totalValue = self.previousScreenNumber * self.currentScreenNumber
+                }else if operation == "-"{
+                    self.totalValue = self.previousScreenNumber - self.currentScreenNumber
+                }else if operation == "+"{
+                    self.totalValue = self.previousScreenNumber + self.currentScreenNumber
+                }
                 
-                self.buttonsList.append(currentButton)
+                self.calculatorLabel.text = String(self.totalValue)
             }
         }
     }
-    
-    func createButtons(buttonTitle: String) -> UIButton{
-        let createdButton = UIButton(type: .system)
+    func addButtonConstraints(){
+        view.addSubview(calculatorLabel)
+        calculatorLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        createdButton.setTitleColor(.white, for: .normal)
-        createdButton.setTitle(" " + buttonTitle + " ", for: .normal)
-        createdButton.backgroundColor = .gray
-        
-        return createdButton
-    }
-    
-    func addButtonsToScreen(){
-        var offsetXR1 = CGFloat(20)
-        var offsetXR2 = CGFloat(20)
-        var offsetXR3 = CGFloat(20)
-        var offsetXR4 = CGFloat(20)
-        var offsetXR5 = CGFloat(20)
-        var offsetY = CGFloat(400)
-        
-        for k in 0..<self.buttonsList.count{
-            if k < 4{
-                self.view.addSubview(buttonsList[k])
-                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR1, heightConsant: offsetY)
-                offsetXR1 += 100
-            }else if k >= 4 && k < 8{
-                offsetY = 470
-                self.view.addSubview(buttonsList[k])
-                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR2, heightConsant: offsetY)
-                offsetXR2 += 100
-            }else if k >= 8 && k < 12{
-                offsetY = 540
-                self.view.addSubview(buttonsList[k])
-                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR3, heightConsant: offsetY)
-                offsetXR3 += 100
-            } else if k >= 12 && k < 16{
-                offsetY = 610
-                self.view.addSubview(buttonsList[k])
-                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR4, heightConsant: offsetY)
-                offsetXR4 += 100
-            } else{
-                offsetY = 680
-                self.view.addSubview(buttonsList[k])
-                setButtonContraints(button: self.buttonsList[k], leadingConstant: offsetXR5, heightConsant: offsetY)
-                offsetXR5 += 100
-            }
+        for i in calculatorButtonsArray{
+            view.addSubview(i.calculatorButton!)
+            i.calculatorButton!.translatesAutoresizingMaskIntoConstraints = false
         }
-    }
-    
-    func setButtonContraints(button: UIButton, leadingConstant: CGFloat, heightConsant: CGFloat){
-        if buttonsList[18] != button{
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingConstant).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-                button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                button.topAnchor.constraint(equalTo: view.topAnchor, constant: heightConsant).isActive = true
-        }else{
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingConstant).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 180).isActive = true
-                button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                button.topAnchor.constraint(equalTo: view.topAnchor, constant: heightConsant).isActive = true
-        }
+        
+        let buttonConstraint_1 = NSLayoutConstraint.constraints(withVisualFormat: "V:[Label]-575-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraint_2 = NSLayoutConstraint.constraints(withVisualFormat: "V:[Label(50)]-[nClear(85)]-[n7(==nClear)]-[n4(==nClear)]-[n1(==nClear)]-[n0(==nClear)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraint_3 = NSLayoutConstraint.constraints(withVisualFormat: "V:[Label]-[nNegate(==nClear)]-[n8(==nClear)]-[n5(==nClear)]-[n2(==nClear)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttConstraint_4 =  NSLayoutConstraint.constraints(withVisualFormat: "V:[Label]-[SC1(==nClear)]-[n9(==nClear)]-[n6(==nClear)]-[n3(==nClear)]-[SC5(==nClear)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttConstraint_5 =  NSLayoutConstraint.constraints(withVisualFormat: "V:[Label]-[SC2(==nClear)]-[SC0(==nClear)]-[SC4(==nClear)]-[SC3(==nClear)]-[SC6(==nClear)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        
+        let buttonConstraintH_1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[Label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraintH_2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[nClear(85)]-[nNegate(==nClear)]-[SC1(==nClear)]-[SC2(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraintH_3 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n7(==nClear)]-[n8(==nClear)]-[n9(==nClear)]-[SC0(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraintH_4 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n4(==nClear)]-[n5(==nClear)]-[n6(==nClear)]-[SC4(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraintH_5 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n1(==nClear)]-[n2(==nClear)]-[n3(==nClear)]-[SC3(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+        let buttonConstraintH_6 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n0(178)]-[SC5(==nClear)]-[SC6(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
+
+
+
+
+        self.view.addConstraints(buttonConstraint_1)
+        self.view.addConstraints(buttonConstraint_2)
+        self.view.addConstraints(buttonConstraint_3)
+        self.view.addConstraints(buttConstraint_4)
+        self.view.addConstraints(buttConstraint_5)
+        self.view.addConstraints(buttonConstraintH_1)
+        self.view.addConstraints(buttonConstraintH_2)
+        self.view.addConstraints(buttonConstraintH_3)
+        self.view.addConstraints(buttonConstraintH_4)
+        self.view.addConstraints(buttonConstraintH_5)
+        self.view.addConstraints(buttonConstraintH_6)
     }
 }

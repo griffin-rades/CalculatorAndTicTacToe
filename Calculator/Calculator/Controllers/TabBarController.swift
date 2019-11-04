@@ -11,7 +11,7 @@ import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     private let calculatorView = CalcViewController()
-    private let calculatorView2 = CalcViewController2()
+    private let nextProject = NextProject()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
         let viewOne = createController(title: "Calculator", imageName: "calculator", vc: self.calculatorView)
-        let viewTwo = createController(title: "Calculator", imageName: "calculator", vc: self.calculatorView2)
+        let viewTwo = createController(title: "Next", imageName: "delete", vc: self.nextProject)
         
         viewControllers = [viewOne, viewTwo]
         
