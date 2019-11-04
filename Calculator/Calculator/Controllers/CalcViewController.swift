@@ -104,6 +104,7 @@ class CalcViewController: UIViewController {
     
     @objc func operationClicked(_ sender: UIButton){
         if let buttonTitle = sender.titleLabel?.text{ //unwrap the button title label
+            var flag = false //used to see if divide by 0
             /*
                 1: save the current screen value as a double
                 2: erase the label and just put the operation symbol
@@ -138,7 +139,11 @@ class CalcViewController: UIViewController {
                  */
                 currentScreenNumber = Double(self.calculatorLabel.text!)!
                 if operation == "/"{ //division
-                    self.totalValue = self.previousScreenNumber / self.currentScreenNumber
+                    if self.currentScreenNumber > 0{
+                        self.totalValue = self.previousScreenNumber / self.currentScreenNumber
+                    }else{
+                        flag = true
+                    }
                 }else if operation == "X"{ //multiplication
                     self.totalValue = self.previousScreenNumber * self.currentScreenNumber
                 }else if operation == "-"{ //subtraction
@@ -147,7 +152,12 @@ class CalcViewController: UIViewController {
                     self.totalValue = self.previousScreenNumber + self.currentScreenNumber
                 }
             //set the calculator label to the value of totalValue
-            self.calculatorLabel.text = String(self.totalValue)
+                if flag {
+                    self.calculatorLabel.text = "Divide by 0 Error"
+                }else{
+                    self.calculatorLabel.text = String(self.totalValue)
+                }
+            
             }else if buttonTitle == "."{ //if decimal point clicked
                 if (self.calculatorLabel.text?.contains("."))!{ //if the label alread is a decimal do nothing
                     
