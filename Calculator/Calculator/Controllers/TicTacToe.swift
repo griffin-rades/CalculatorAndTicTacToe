@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NextProject: UIViewController {
+class TicTacToe: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
