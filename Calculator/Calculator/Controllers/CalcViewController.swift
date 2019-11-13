@@ -31,10 +31,10 @@ class CalcViewController: UIViewController {
         
         let buttonNumbers = ["Clear","0","1","2","3","4","5","6","7","8","9"] //Array of the number button label names including clear and negate
         let operationButtons = ["X","%","/","+","-",".","=","+/-"] //Array of operation button label names
-        let landScapeButtons = ["(",")","mc","m+","m-","mr","2nd","x^2","x^3","x^y","e^x","10^x","1/x","1/x^-2","1/x^-3","1/x^-y","ln","log","x!","sin","cos","tan","e","EE","Rad","sinh","cosh","tanh","pi","Rans"]
+        let landScapeButtons = ["(",")","mc","m+","m-","mr","2nd","x^2","x^3","x^y","e^x","10^x","1/x","1/x^2","1/x^3","1/x^y","ln","log","x!","sin","cos","tan","e","EE","Rad","sinh","cosh","tanh","pi","Rans"]
         
         //set up the calculator label
-        self.calculatorLabel.backgroundColor = .blue
+        self.calculatorLabel.backgroundColor = .white
         self.calculatorLabel.text = ""
         self.calculatorLabel.textAlignment = .right
         self.calculatorLabel.font = self.calculatorLabel.font.withSize(40)
@@ -50,7 +50,7 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
             x.calculatorButton?.addTarget(self, action: #selector(numberClicked), for: .touchUpInside)
-            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
+            x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
             self.calculatorButtonsArray.append(x)
             self.buttonDictionary[x.title!] = x.calculatorButton
@@ -65,7 +65,7 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
             x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
-            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
+            x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
             self.calculatorButtonsArray.append(x)
             self.buttonDictionary["SC" + String(i)] = x.calculatorButton
@@ -79,7 +79,7 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.backgroundColor = .gray
             x.calculatorButton?.setTitleColor(.white, for: .normal)
             x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
-            x.calculatorButton?.titleLabel?.font = self.calculatorLabel.font
+            x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
             self.extraCalculatorButtons.append(x)
             self.buttonDictionary["EB" + String(i)] = x.calculatorButton
@@ -210,7 +210,7 @@ class CalcViewController: UIViewController {
         self.extraButtonsView.translatesAutoresizingMaskIntoConstraints = false
         
         self.mainButtonView.backgroundColor = .black
-        self.extraButtonsView.backgroundColor = .red
+        self.extraButtonsView.backgroundColor = .black
         self.viewDictionary["buttonView"] = self.mainButtonView
         self.viewDictionary["label"] = self.calculatorLabel
         self.viewDictionary["otherButtons"]  = self.extraButtonsView
@@ -224,9 +224,12 @@ class CalcViewController: UIViewController {
 //        let lViewConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-0-[otherButtons]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
 
         if isPortrait{
-            print("Port")
             self.mainButtonView.removeFromSuperview()
             self.extraButtonsView.removeFromSuperview()
+            
+            for x in calculatorButtonsArray{
+                x.changeFontSize(landscape: false)
+            }
             
             self.view.addSubview(self.mainButtonView)
             let pViewConstraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[label]-5-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
@@ -239,13 +242,16 @@ class CalcViewController: UIViewController {
             
             addStandardButtonConstraints()
         }else{
-            print("Land")
             self.mainButtonView.removeFromSuperview()
             self.view.addSubview(self.mainButtonView)
             self.view.addSubview(self.extraButtonsView)
             
+            for x in calculatorButtonsArray{
+                x.changeFontSize(landscape: true)
+            }
+            
             let lViewConstraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[label]-5-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-            let lViewConstraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[otherButtons(400)]-0-[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
+            let lViewConstraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[otherButtons(==buttonView)]-0-[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
             let lViewConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-0-[otherButtons]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
             let lViewConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-0-[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
 

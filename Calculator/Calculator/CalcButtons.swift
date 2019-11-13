@@ -18,4 +18,12 @@ class CalcButtons: NSObject{
     override init(){
         super.init()
     }
+    func changeFontSize(landscape: Bool){
+        if !landscape{
+            self.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        }
+        else{
+            self.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        }
+    }
 }
