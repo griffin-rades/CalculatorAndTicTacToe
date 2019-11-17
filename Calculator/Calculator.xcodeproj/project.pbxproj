@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		741562E42381DEA7003A667A /* ticTacToeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741562E32381DEA7003A667A /* ticTacToeButtons.swift */; };
 		74BA8DE42363776C00D9CD46 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE32363776C00D9CD46 /* TabBarController.swift */; };
 		74BA8DE82363816400D9CD46 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE72363816400D9CD46 /* TicTacToe.swift */; };
 		74BCA5E023692795009A4595 /* CalcButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BCA5DF23692795009A4595 /* CalcButtons.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		741562E32381DEA7003A667A /* ticTacToeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ticTacToeButtons.swift; sourceTree = "<group>"; };
 		74BA8DE32363776C00D9CD46 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		74BA8DE72363816400D9CD46 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 		74BCA5DF23692795009A4595 /* CalcButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButtons.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				74BCA5DF23692795009A4595 /* CalcButtons.swift */,
+				741562E32381DEA7003A667A /* ticTacToeButtons.swift */,
 				74BA8DE52363779600D9CD46 /* Delegates */,
 				74BA8DE6236377B800D9CD46 /* Controllers */,
 				74BE9CAE2360F0D900976304 /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741562E42381DEA7003A667A /* ticTacToeButtons.swift in Sources */,
 				74BE9CA72360F0D700976304 /* CalcViewController.swift in Sources */,
 				74BE9CAD2360F0D700976304 /* Calculator.xcdatamodeld in Sources */,
 				74BE9CA32360F0D600976304 /* AppDelegate.swift in Sources */,

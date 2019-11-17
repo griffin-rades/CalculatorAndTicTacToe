@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class CalcButtons: NSObject{
     var buttonLabel:String?
     var title:String?
