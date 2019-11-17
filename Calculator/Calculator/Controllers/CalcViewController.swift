@@ -85,12 +85,14 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
             x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
+            if x.calculatorButton?.titleLabel?.text == "x^2" || x.calculatorButton?.titleLabel?.text == "x^3"  || x.calculatorButton?.titleLabel?.text == "x^3" || x.calculatorButton?.titleLabel?.text == "x^y" || x.calculatorButton?.titleLabel?.text == "2^x" || x.calculatorButton?.titleLabel?.text == "1/x" || x.calculatorButton?.titleLabel?.text == "sqrtX" || x.calculatorButton?.titleLabel?.text == "crtX" || x.calculatorButton?.titleLabel?.text == "YrtX" || x.calculatorButton?.titleLabel?.text == "pi"{
+                x.calculatorButton?.backgroundColor = .red
+            }
+            
             self.extraCalculatorButtons.append(x)
             self.buttonDictionary["EB" + String(i)] = x.calculatorButton
         }
         createMainButtonView(isPortrait: true)
-//        addStandardButtonConstraints() //add constraints to the buttons using the button dicitonary
-//        addExtraButtonConstraints()
     }
     
     override func viewDidLoad() {
@@ -266,14 +268,6 @@ class CalcViewController: UIViewController {
         self.viewDictionary["buttonView"] = self.mainButtonView
         self.viewDictionary["label"] = self.calculatorLabel
         self.viewDictionary["otherButtons"]  = self.extraButtonsView
-        
-//        let pViewConstraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[label]-5-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-//        let pViewConstraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-//        let pViewConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label(200)]-0-[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-
-//        let lViewConstraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[label]-5-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-//        let lViewConstraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[otherButtons(200)]-0-[buttonView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
-//        let lViewConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-0-[otherButtons]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.viewDictionary)
 
         if isPortrait{
             self.mainButtonView.removeFromSuperview()
@@ -326,14 +320,12 @@ class CalcViewController: UIViewController {
         }
         
         //using the button dictionary create the constraints verticaly
-        //let buttonConstraint_1 = NSLayoutConstraint.constraints(withVisualFormat: "V:[Label]-575-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraint_2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[nClear]-[n7(==nClear)]-[n4(==nClear)]-[n1(==nClear)]-[n0(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraint_3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[SC7(==nClear)]-[n8(==nClear)]-[n5(==nClear)]-[n2(==nClear)]-[n0(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraint_4 =  NSLayoutConstraint.constraints(withVisualFormat: "V:|-[SC1(==nClear)]-[n9(==nClear)]-[n6(==nClear)]-[n3(==nClear)]-[SC5(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraint_5 =  NSLayoutConstraint.constraints(withVisualFormat: "V:|-[SC2(==nClear)]-[SC0(==nClear)]-[SC4(==nClear)]-[SC3(==nClear)]-[SC6(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         
         //using the button dictions create constraints horizontally
-        //let buttonConstraintH_1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[Label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraintH_2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[nClear]-[SC7(==nClear)]-[SC1(==nClear)]-[SC2(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraintH_3 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n7(==nClear)]-[n8(==nClear)]-[n9(==nClear)]-[SC0(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
         let buttonConstraintH_4 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[n4(==nClear)]-[n5(==nClear)]-[n6(==nClear)]-[SC4(==nClear)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.buttonDictionary)
@@ -342,12 +334,10 @@ class CalcViewController: UIViewController {
 
 
         //add each of the constaints to the mainButtonView
-        //self.view.addConstraints(buttonConstraint_1)
         self.mainButtonView.addConstraints(buttonConstraint_2)
         self.mainButtonView.addConstraints(buttonConstraint_3)
         self.mainButtonView.addConstraints(buttonConstraint_4)
         self.mainButtonView.addConstraints(buttonConstraint_5)
-        //self.view.addConstraints(buttonConstraintH_1)
         self.mainButtonView.addConstraints(buttonConstraintH_2)
         self.mainButtonView.addConstraints(buttonConstraintH_3)
         self.mainButtonView.addConstraints(buttonConstraintH_4)
