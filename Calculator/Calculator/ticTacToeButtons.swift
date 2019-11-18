@@ -18,7 +18,8 @@ class ticTacToeButtons: NSObject{
         super.init()
     }
     
-    func changeButtonLabel(){
-        
+    func startGame(){
+        self.ticTacToeButon?.setTitle("", for: .normal)
     }
+    
 }

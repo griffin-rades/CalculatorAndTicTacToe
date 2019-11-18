@@ -13,9 +13,13 @@ class TicTacToe: UIViewController {
     var xOrO = UISwitch()
     var playerLabel = UILabel()
     var informationLabel = UILabel()
-    var startButton = UIButton()
+    var startButton = UIButton(type: .system)
     var gameBoardButtons: [ticTacToeButtons] = []
+    var gameBoardFinal: [String] = []
     var ticTacToeDictionary = [String: Any]()
+    var gameStarted = false
+    var playerTurnX = true
+    var numberOfClicks = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,13 @@ class TicTacToe: UIViewController {
         self.playerLabel.text = "Player: X"
         self.playerLabel.textAlignment = .center
         self.playerLabel.textColor = .white
+        
+        self.informationLabel.textColor = .white
+        self.informationLabel.numberOfLines = 0
+        self.informationLabel.textAlignment = .center
+        self.informationLabel.text = "The game is Tic-Tac-Toe. Use the slider at the top to decide who goes first, then after that alternate back and forth until all of the game board slots have been filled. Then a winner will be decided."
+    
+        self.xOrO.addTarget(self, action: #selector(playerSlider), for: .touchUpInside)
     }
     
     override func loadView(){
@@ -56,19 +67,68 @@ class TicTacToe: UIViewController {
             x.title = "button" + String(i)
             x.ticTacToeButon = UIButton(type: .system)
             x.ticTacToeButon?.setTitle("", for: .normal)
+            x.ticTacToeButon?.tag = i
             x.ticTacToeButon?.backgroundColor = .white
             x.ticTacToeButon?.setTitleColor(.black, for: .normal)
             x.ticTacToeButon?.addTarget(self, action: #selector(gameButtonClicked), for: .touchUpInside)
+            x.ticTacToeButon?.titleLabel?.font = UIFont.systemFont(ofSize: 40)
             self.ticTacToeDictionary[x.title!] = x.ticTacToeButon
             self.gameBoardButtons.append(x)
         }
     }
-    
-    @objc func gameButtonClicked(){
-        print("game button clicked")
+    func decideWinner(){
+        for x in gameBoardButtons{
+            gameBoardFinal.append((x.ticTacToeButon?.titleLabel!.text)!)
+        }
+        print(gameBoardFinal[0])
     }
-    @objc func startButtonClicked(){
-        print("start button clicked")
+    @objc func playerSlider(_ sender: UISwitch){
+        if sender.isOn{
+            playerLabel.text = "Player: O"
+            playerTurnX = false
+        }else{
+            playerLabel.text = "Player: X"
+            playerTurnX = true
+        }
+    }
+    
+    @objc func gameButtonClicked(_ sender: UIButton){
+        if gameStarted && (numberOfClicks < 9){
+            changeLabel(player: playerTurnX, whichButton: sender.tag)
+            if numberOfClicks == 8{
+                if playerTurnX{
+                    playerTurnX = false
+                }else{
+                    playerTurnX = true
+                }
+                numberOfClicks += 1
+                decideWinner()
+            }else{
+                if playerTurnX{
+                    playerTurnX = false
+                }else{
+                    playerTurnX = true
+                }
+                numberOfClicks += 1
+            }
+        }
+    }
+    
+    @objc func startButtonClicked(_ sender: UIButton){
+        gameStarted = true
+        numberOfClicks = 0
+        self.informationLabel.text = "GAME STARTED!"
+        for x in gameBoardButtons{
+            x.startGame()
+        }
+    }
+    
+    func changeLabel(player: Bool, whichButton: Int){
+        if player{
+            gameBoardButtons[whichButton].ticTacToeButon?.setTitle("X", for: .normal)
+        }else{
+            gameBoardButtons[whichButton].ticTacToeButon?.setTitle("O", for: .normal)
+        }
     }
     
     func gameBoardConstraints(){
