@@ -10,16 +10,11 @@ import Foundation
 import UIKit
 
 class ticTacToeButtons: NSObject{
-    var ticTacToeButon:UIButton?
+    var ticTacToeButton:UIButton?
     var title:String?
-    var buttonLabel:UILabel?
+    var buttonLabel:String?
     
     override init(){
         super.init()
     }
-    
-    func startGame(){
-        self.ticTacToeButon?.setTitle("", for: .normal)
-    }
-    
 }

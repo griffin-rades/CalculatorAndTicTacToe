@@ -20,6 +20,8 @@ class TicTacToe: UIViewController {
     var gameStarted = false
     var playerTurnX = true
     var numberOfClicks = 0
+    var isWinner = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,22 +67,60 @@ class TicTacToe: UIViewController {
             let x = ticTacToeButtons()
             
             x.title = "button" + String(i)
-            x.ticTacToeButon = UIButton(type: .system)
-            x.ticTacToeButon?.setTitle("", for: .normal)
-            x.ticTacToeButon?.tag = i
-            x.ticTacToeButon?.backgroundColor = .white
-            x.ticTacToeButon?.setTitleColor(.black, for: .normal)
-            x.ticTacToeButon?.addTarget(self, action: #selector(gameButtonClicked), for: .touchUpInside)
-            x.ticTacToeButon?.titleLabel?.font = UIFont.systemFont(ofSize: 40)
-            self.ticTacToeDictionary[x.title!] = x.ticTacToeButon
+            x.buttonLabel = " "
+            x.ticTacToeButton = UIButton(type: .system)
+            x.ticTacToeButton?.setTitle(x.buttonLabel, for: .normal)
+            x.ticTacToeButton?.tag = i
+            x.ticTacToeButton?.backgroundColor = .white
+            x.ticTacToeButton?.setTitleColor(.black, for: .normal)
+            x.ticTacToeButton?.addTarget(self, action: #selector(gameButtonClicked), for: .touchUpInside)
+            x.ticTacToeButton?.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+            self.ticTacToeDictionary[x.title!] = x.ticTacToeButton
             self.gameBoardButtons.append(x)
         }
     }
-    func decideWinner(){
+    
+    func decideWinner() -> Bool{
+        self.gameBoardFinal.removeAll()
+        var p = 0
         for x in gameBoardButtons{
-            gameBoardFinal.append((x.ticTacToeButon?.titleLabel!.text)!)
+            if let buttonTitle = x.buttonLabel{
+                if buttonTitle != " "{
+                    gameBoardFinal.append(buttonTitle)
+                }else{
+                    gameBoardFinal.append(String(p))
+                }
+            }
+            p += 1
         }
-        print(gameBoardFinal[0])
+
+        if (gameBoardFinal[0] == gameBoardFinal[1]) && (gameBoardFinal[1] == gameBoardFinal[2]) && (gameBoardFinal[0] == gameBoardFinal[2]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            return true
+        }else if (gameBoardFinal[3] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[5]) && (gameBoardFinal[3] == gameBoardFinal[5]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[3]
+            return true
+        }else if (gameBoardFinal[6] == gameBoardFinal[7]) && (gameBoardFinal[7] == gameBoardFinal[8]) && (gameBoardFinal[6] == gameBoardFinal[8]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[6]
+            return true
+        }else if (gameBoardFinal[0] == gameBoardFinal[3]) && (gameBoardFinal[3] == gameBoardFinal[6]) && (gameBoardFinal[0] == gameBoardFinal[6]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            return true
+        }else if (gameBoardFinal[1] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[7]) && (gameBoardFinal[1] == gameBoardFinal[7]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[1]
+            return true
+        }else if (gameBoardFinal[2] == gameBoardFinal[5]) && (gameBoardFinal[5] == gameBoardFinal[8]) && (gameBoardFinal[2] == gameBoardFinal[8]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[2]
+            return true
+        }else if (gameBoardFinal[0] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[8]) && (gameBoardFinal[0] == gameBoardFinal[8]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            return true
+        }else if (gameBoardFinal[2] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[6]) && (gameBoardFinal[2] == gameBoardFinal[6]){
+            self.informationLabel.text = "The winner is " + gameBoardFinal[2]
+            return true
+        }else{
+            return false
+        }
     }
     @objc func playerSlider(_ sender: UISwitch){
         if sender.isOn{
@@ -93,41 +133,40 @@ class TicTacToe: UIViewController {
     }
     
     @objc func gameButtonClicked(_ sender: UIButton){
-        if gameStarted && (numberOfClicks < 9){
+        if gameStarted && !isWinner{
             changeLabel(player: playerTurnX, whichButton: sender.tag)
-            if numberOfClicks == 8{
-                if playerTurnX{
-                    playerTurnX = false
-                }else{
-                    playerTurnX = true
-                }
-                numberOfClicks += 1
-                decideWinner()
+            
+            if playerTurnX{
+                playerTurnX = false
             }else{
-                if playerTurnX{
-                    playerTurnX = false
-                }else{
-                    playerTurnX = true
-                }
-                numberOfClicks += 1
+                playerTurnX = true
             }
+            
+            isWinner = decideWinner()
         }
     }
     
     @objc func startButtonClicked(_ sender: UIButton){
-        gameStarted = true
-        numberOfClicks = 0
+        self.gameStarted = true
+        self.isWinner = false
+        
+        self.startButton.setTitle("Restart", for: .normal)
         self.informationLabel.text = "GAME STARTED!"
+        
         for x in gameBoardButtons{
-            x.startGame()
+            x.buttonLabel = " "
+            x.ticTacToeButton?.titleLabel?.text = x.buttonLabel
+            x.ticTacToeButton?.setTitle("", for: .normal)
         }
     }
     
     func changeLabel(player: Bool, whichButton: Int){
         if player{
-            gameBoardButtons[whichButton].ticTacToeButon?.setTitle("X", for: .normal)
+            gameBoardButtons[whichButton].buttonLabel = "X"
+            gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }else{
-            gameBoardButtons[whichButton].ticTacToeButon?.setTitle("O", for: .normal)
+            gameBoardButtons[whichButton].buttonLabel = "O"
+            gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }
     }
     
@@ -136,8 +175,8 @@ class TicTacToe: UIViewController {
         self.gameBoardView.addSubview(informationLabel)
         
         for i in gameBoardButtons{
-            self.gameBoardView.addSubview(i.ticTacToeButon!)
-            i.ticTacToeButon?.translatesAutoresizingMaskIntoConstraints = false
+            self.gameBoardView.addSubview(i.ticTacToeButton!)
+            i.ticTacToeButton?.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let constratint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[button0]-[button1(==button0)]-[button2(==button0)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
