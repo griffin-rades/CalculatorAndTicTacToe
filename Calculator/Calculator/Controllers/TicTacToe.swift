@@ -41,7 +41,7 @@ class TicTacToe: UIViewController {
         self.informationLabel.textColor = .white
         self.informationLabel.numberOfLines = 0
         self.informationLabel.textAlignment = .center
-        self.informationLabel.text = "The game is Tic-Tac-Toe. Use the slider at the top to decide who goes first, then after that alternate back and forth until all of the game board slots have been filled. Then a winner will be decided."
+        self.informationLabel.text = "The game is Tic-Tac-Toe. Use the slider at the top to decide who goes first, then after that alternate back and forth. The a winner will be decided automaticly when a player has 3 in row, collumn, or diagonal."
     
         self.xOrO.addTarget(self, action: #selector(playerSlider), for: .touchUpInside)
     }
@@ -137,8 +137,10 @@ class TicTacToe: UIViewController {
             changeLabel(player: playerTurnX, whichButton: sender.tag)
             
             if playerTurnX{
+                self.informationLabel.text = "Player O turn"
                 playerTurnX = false
             }else{
+                self.informationLabel.text = "Player X turn"
                 playerTurnX = true
             }
             
@@ -149,9 +151,13 @@ class TicTacToe: UIViewController {
     @objc func startButtonClicked(_ sender: UIButton){
         self.gameStarted = true
         self.isWinner = false
+        self.playerTurnX = true
         
+        self.playerLabel.text = "Player: X"
         self.startButton.setTitle("Restart", for: .normal)
         self.informationLabel.text = "GAME STARTED!"
+        
+        self.xOrO.setOn(false, animated: true)
         
         for x in gameBoardButtons{
             x.buttonLabel = " "
