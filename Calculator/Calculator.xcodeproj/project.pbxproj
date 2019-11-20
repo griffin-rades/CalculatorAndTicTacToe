@@ -24,7 +24,7 @@
 		74BA8DE32363776C00D9CD46 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		74BA8DE72363816400D9CD46 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 		74BCA5DF23692795009A4595 /* CalcButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButtons.swift; sourceTree = "<group>"; };
-		74BE9C9F2360F0D600976304 /* TabbedProjects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabbedProjects.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74BE9C9F2360F0D600976304 /* Tabbed Projects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tabbed Projects.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BE9CA22360F0D600976304 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74BE9CA42360F0D600976304 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		74BE9CA62360F0D700976304 /* CalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		74BE9CA02360F0D600976304 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				74BE9C9F2360F0D600976304 /* TabbedProjects.app */,
+				74BE9C9F2360F0D600976304 /* Tabbed Projects.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			);
 			name = Calculator;
 			productName = Calculator;
-			productReference = 74BE9C9F2360F0D600976304 /* TabbedProjects.app */;
+			productReference = 74BE9C9F2360F0D600976304 /* Tabbed Projects.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -316,7 +316,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = edu.smumn.Calculator;
-				PRODUCT_NAME = TabbedProjects;
+				PRODUCT_NAME = "Tabbed Projects";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -334,7 +334,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = edu.smumn.Calculator;
-				PRODUCT_NAME = TabbedProjects;
+				PRODUCT_NAME = "Tabbed Projects";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
