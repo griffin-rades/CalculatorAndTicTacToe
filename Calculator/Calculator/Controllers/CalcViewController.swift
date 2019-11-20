@@ -38,6 +38,8 @@ class CalcViewController: UIViewController {
         self.calculatorLabel.text = ""
         self.calculatorLabel.textAlignment = .right
         self.calculatorLabel.font = self.calculatorLabel.font.withSize(40)
+        self.calculatorLabel.textColor = .black
+        self.calculatorLabel.textAlignment = .center
         
         //create array of calculator buttons (numbers) and add them to a dictonary of the buttons Key:"String" Value:UIButton
         for i in buttonNumbers{

@@ -45,7 +45,7 @@ class TicTacToe: UIViewController {
         self.informationLabel.numberOfLines = 0
         self.informationLabel.textAlignment = .center
         self.informationLabel.text = "The game is Tic-Tac-Toe. Use the switch at the top to decide who goes first, then after that alternate back and forth. The a winner will be decided automaticly when a player has 3 in row, collumn, or diagonal."
-        self.informationLabel.font = UIFont.systemFont(ofSize: 20)
+        self.informationLabel.font = UIFont.systemFont(ofSize: 15)
 
         
         self.xOrO.addTarget(self, action: #selector(playerSlider), for: .touchUpInside)
@@ -63,18 +63,15 @@ class TicTacToe: UIViewController {
         
         createGameBoardButtons()
         
-        gameScreenConstraints(landscape: false)
-        gameBoardConstraints(landscape: false)
+        gameScreenConstraints(portrait: true)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {
-            gameScreenConstraints(landscape: true)
-            gameBoardConstraints(landscape: true)
+            gameScreenConstraints(portrait: false)
         } else{
-            gameScreenConstraints(landscape: false)
-            gameBoardConstraints(landscape: false)
+            gameScreenConstraints(portrait: true)
         }
     }
     
@@ -199,7 +196,7 @@ class TicTacToe: UIViewController {
         }
     }
     
-    func gameBoardConstraints(landscape: Bool){
+    func gameBoardConstraints(){
         self.informationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.gameBoardView.addSubview(informationLabel)
         
@@ -212,9 +209,9 @@ class TicTacToe: UIViewController {
         let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[button3]-[button4(==button0)]-[button5(==button0)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
         let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[button6]-[button7(==button0)]-[button8(==button0)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
         let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button0(100)]-[button3(==button0)]-[button6(==button0)]-[label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint5 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button1(==button0)]-[button4(==button0)]-[button7(==button0)]-[label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint6 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button2(==button0)]-[button5(==button0)]-[button8(==button0)]-[label]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+        let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button0(>=60,<=100)]-[button3(==button0)]-[button6(==button0)]-[label]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+        let constraint5 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button1(==button0)]-[button4(==button0)]-[button7(==button0)]-[label]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+        let constraint6 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[button2(==button0)]-[button5(==button0)]-[button8(==button0)]-[label]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
         
         
         self.gameBoardView.addConstraints(constraint0)
@@ -226,27 +223,60 @@ class TicTacToe: UIViewController {
         self.gameBoardView.addConstraints(constraint6)
     }
     
-    func gameScreenConstraints(landscape: Bool){
-        self.view.addSubview(xOrO)
-        self.view.addSubview(gameBoardView)
-        self.view.addSubview(startButton)
-        self.view.addSubview(playerLabel)
+    func gameScreenConstraints(portrait: Bool){
+        self.xOrO.removeFromSuperview()
+        self.gameBoardView.removeFromSuperview()
+        self.startButton.removeFromSuperview()
+        self.playerLabel.removeFromSuperview()
         
         self.xOrO.translatesAutoresizingMaskIntoConstraints = false
         self.gameBoardView.translatesAutoresizingMaskIntoConstraints = false
         self.startButton.translatesAutoresizingMaskIntoConstraints = false
         self.playerLabel.translatesAutoresizingMaskIntoConstraints = false
-               
-        let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-50-[switch]-50-[playerLabel(==start)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[start(50)]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[switch]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-        let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[playerLabel]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+        
+        if portrait{
+            self.view.addSubview(xOrO)
+            self.view.addSubview(gameBoardView)
+            self.view.addSubview(startButton)
+            self.view.addSubview(playerLabel)
+            
+            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-50-[switch]-50-[playerLabel(==start)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[start(50)]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[switch]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[playerLabel]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
 
-        self.view.addConstraints(constraint0)
-        self.view.addConstraints(constraint1)
-        self.view.addConstraints(constraint2)
-        self.view.addConstraints(constraint3)
-        self.view.addConstraints(constraint4)
+            self.view.addConstraints(constraint0)
+            self.view.addConstraints(constraint1)
+            self.view.addConstraints(constraint2)
+            self.view.addConstraints(constraint3)
+            self.view.addConstraints(constraint4)
+            
+        }else{
+            self.xOrO.removeFromSuperview()
+            self.gameBoardView.removeFromSuperview()
+            self.startButton.removeFromSuperview()
+            self.playerLabel.removeFromSuperview()
+            
+            self.view.addSubview(xOrO)
+            self.view.addSubview(gameBoardView)
+            self.view.addSubview(startButton)
+            self.view.addSubview(playerLabel)
+            
+            
+            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-40-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[switch]-40-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[playerLabel]-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[start(50)]-[switch]-[playerLabel(==start)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+
+            self.view.addConstraints(constraint0)
+            self.view.addConstraints(constraint1)
+            self.view.addConstraints(constraint2)
+            self.view.addConstraints(constraint3)
+            self.view.addConstraints(constraint4)
+        }
+        
+        gameBoardConstraints()
     }
 }

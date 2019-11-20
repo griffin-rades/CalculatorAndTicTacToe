@@ -19,7 +19,7 @@ class CalcButtons: NSObject{
     }
     func changeFontSize(landscape: Bool){
         if !landscape{
-            self.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+            self.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         }
         else{
             self.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
