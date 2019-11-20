@@ -83,6 +83,7 @@ class TicTacToe: UIViewController {
     func decideWinner() -> Bool{
         self.gameBoardFinal.removeAll()
         var p = 0
+        var numLetters = 0
         for x in gameBoardButtons{
             if let buttonTitle = x.buttonLabel{
                 if buttonTitle != " "{
@@ -90,6 +91,9 @@ class TicTacToe: UIViewController {
                 }else{
                     gameBoardFinal.append(String(p))
                 }
+            }
+            if gameBoardFinal[p] == "X" || gameBoardFinal[p] == "O"{
+                numLetters += 1
             }
             p += 1
         }
@@ -117,6 +121,9 @@ class TicTacToe: UIViewController {
             return true
         }else if (gameBoardFinal[2] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[6]) && (gameBoardFinal[2] == gameBoardFinal[6]){
             self.informationLabel.text = "The winner is " + gameBoardFinal[2]
+            return true
+        }else if ((self.informationLabel.text == "Player O turn" || self.informationLabel.text == "Player X turn") && numLetters == 9){
+            self.informationLabel.text = "Draw! There are no winners"
             return true
         }else{
             return false
