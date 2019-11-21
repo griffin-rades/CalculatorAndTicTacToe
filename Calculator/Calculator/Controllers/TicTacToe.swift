@@ -189,9 +189,11 @@ class TicTacToe: UIViewController {
     func changeLabel(player: Bool, whichButton: Int){
         if player{
             gameBoardButtons[whichButton].buttonLabel = "X"
+            gameBoardButtons[whichButton].ticTacToeButton?.setTitleColor(.red, for: .normal)
             gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }else{
             gameBoardButtons[whichButton].buttonLabel = "O"
+            gameBoardButtons[whichButton].ticTacToeButton?.setTitleColor(.blue, for: .normal)
             gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }
     }
