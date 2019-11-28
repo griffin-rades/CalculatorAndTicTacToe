@@ -29,7 +29,7 @@ class CalcViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        let buttonNumbers = ["Clear","0","1","2","3","4","5","6","7","8","9"] //Array of the number button label names including clear and negate
+        let buttonNumbers = [NSLocalizedString("clearButton", comment: "Clear"),"0","1","2","3","4","5","6","7","8","9"] //Array of the number button label names including clear and negate
         let operationButtons = ["X","%","/","+","-",".","=","+/-"] //Array of operation button label names
         let landScapeButtons = ["(",")","mc","m+","m-","mr","2nd","x^2","x^3","x^y","e^x","2^x","1/x","sqrtX","crtX","YrtX","ln","log","x!","sin","cos","tan","e","EE","Rad","sinh","cosh","tanh","pi","Rans"]
         

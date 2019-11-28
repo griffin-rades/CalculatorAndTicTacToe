@@ -31,11 +31,11 @@ class TicTacToe: UIViewController {
         self.gameBoardView.backgroundColor = .gray
         self.playerLabel.backgroundColor = .black
         
-        self.startButton.setTitle("Start", for: .normal)
+        self.startButton.setTitle(NSLocalizedString("buttonLabelStart", comment: "Start"), for: .normal)
         self.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         self.startButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         
-        self.playerLabel.text = "Player: X"
+        self.playerLabel.text = NSLocalizedString("startingPlayer", comment: "Player: X")
         self.playerLabel.textAlignment = .center
         self.playerLabel.textColor = .white
         self.playerLabel.font = UIFont.systemFont(ofSize: 20)
@@ -44,7 +44,7 @@ class TicTacToe: UIViewController {
         self.informationLabel.textColor = .white
         self.informationLabel.numberOfLines = 0
         self.informationLabel.textAlignment = .center
-        self.informationLabel.text = "The game is Tic-Tac-Toe. Use the switch at the top to decide who goes first, then after that alternate back and forth. The a winner will be decided automaticly when a player has 3 in row, collumn, or diagonal."
+        self.informationLabel.text = NSLocalizedString("startingGameInformationLabel", comment: "The game is Tic-Tac-Toe. Use the switch at the top to decide who goes first, then after that alternate back and forth. The a winner will be decided automaticly when a player has 3 in row, collumn, or diagonal.")
         self.informationLabel.font = UIFont.systemFont(ofSize: 15)
 
         
@@ -112,31 +112,31 @@ class TicTacToe: UIViewController {
         }
 
         if (gameBoardFinal[0] == gameBoardFinal[1]) && (gameBoardFinal[1] == gameBoardFinal[2]) && (gameBoardFinal[0] == gameBoardFinal[2]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[0]
             return true
         }else if (gameBoardFinal[3] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[5]) && (gameBoardFinal[3] == gameBoardFinal[5]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[3]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[3]
             return true
         }else if (gameBoardFinal[6] == gameBoardFinal[7]) && (gameBoardFinal[7] == gameBoardFinal[8]) && (gameBoardFinal[6] == gameBoardFinal[8]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[6]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[6]
             return true
         }else if (gameBoardFinal[0] == gameBoardFinal[3]) && (gameBoardFinal[3] == gameBoardFinal[6]) && (gameBoardFinal[0] == gameBoardFinal[6]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[0]
             return true
         }else if (gameBoardFinal[1] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[7]) && (gameBoardFinal[1] == gameBoardFinal[7]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[1]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[1]
             return true
         }else if (gameBoardFinal[2] == gameBoardFinal[5]) && (gameBoardFinal[5] == gameBoardFinal[8]) && (gameBoardFinal[2] == gameBoardFinal[8]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[2]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[2]
             return true
         }else if (gameBoardFinal[0] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[8]) && (gameBoardFinal[0] == gameBoardFinal[8]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[0]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[0]
             return true
         }else if (gameBoardFinal[2] == gameBoardFinal[4]) && (gameBoardFinal[4] == gameBoardFinal[6]) && (gameBoardFinal[2] == gameBoardFinal[6]){
-            self.informationLabel.text = "The winner is " + gameBoardFinal[2]
+            self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[2]
             return true
         }else if ((self.informationLabel.text == "Player O turn" || self.informationLabel.text == "Player X turn") && numLetters == 9){
-            self.informationLabel.text = "Draw! There are no winners"
+            self.informationLabel.text = NSLocalizedString("drawText", comment: "Draw! There are no winners")
             return true
         }else{
             return false
@@ -144,10 +144,10 @@ class TicTacToe: UIViewController {
     }
     @objc func playerSlider(_ sender: UISwitch){
         if sender.isOn{
-            playerLabel.text = "Player: O"
+            playerLabel.text = NSLocalizedString("playerO", comment: "Player: O")
             playerTurnX = false
         }else{
-            playerLabel.text = "Player: X"
+            playerLabel.text = NSLocalizedString("playerX", comment: "Player: X")
             playerTurnX = true
         }
     }
@@ -157,10 +157,10 @@ class TicTacToe: UIViewController {
             changeLabel(player: playerTurnX, whichButton: sender.tag)
             
             if playerTurnX{
-                self.informationLabel.text = "Player O turn"
+                self.informationLabel.text = NSLocalizedString("playerO", comment: "Player: O")
                 playerTurnX = false
             }else{
-                self.informationLabel.text = "Player X turn"
+                self.informationLabel.text = NSLocalizedString("playerX", comment: "Player: X")
                 playerTurnX = true
             }
             
@@ -173,9 +173,9 @@ class TicTacToe: UIViewController {
         self.isWinner = false
         self.playerTurnX = true
         
-        self.playerLabel.text = "Player: X"
-        self.startButton.setTitle("Restart", for: .normal)
-        self.informationLabel.text = "GAME STARTED! Use the switch to decide who goes first."
+        self.playerLabel.text = NSLocalizedString("playerX", comment: "Player: X")
+        self.startButton.setTitle(NSLocalizedString("restartTheGame", comment: "Restart"), for: .normal)
+        self.informationLabel.text = NSLocalizedString("durringGameInformation", comment: "GAME STARTED! Use the switch to decide who goes first.")
         
         self.xOrO.setOn(false, animated: true)
         
@@ -188,11 +188,11 @@ class TicTacToe: UIViewController {
     
     func changeLabel(player: Bool, whichButton: Int){
         if player{
-            gameBoardButtons[whichButton].buttonLabel = "X"
+            gameBoardButtons[whichButton].buttonLabel = NSLocalizedString("playerXButtonLabel", comment: "X")
             gameBoardButtons[whichButton].ticTacToeButton?.setTitleColor(.red, for: .normal)
             gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }else{
-            gameBoardButtons[whichButton].buttonLabel = "O"
+            gameBoardButtons[whichButton].buttonLabel = NSLocalizedString("playerOButtonLabel", comment: "O")
             gameBoardButtons[whichButton].ticTacToeButton?.setTitleColor(.blue, for: .normal)
             gameBoardButtons[whichButton].ticTacToeButton?.setTitle(gameBoardButtons[whichButton].buttonLabel, for: .normal)
         }
@@ -242,7 +242,7 @@ class TicTacToe: UIViewController {
             self.view.addSubview(startButton)
             self.view.addSubview(playerLabel)
             
-            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-50-[switch]-50-[playerLabel(==start)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-40-[switch]-40-[playerLabel(==start)]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
             let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
             let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[start(50)]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
             let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[switch]-50-[gameBoard]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
@@ -266,9 +266,9 @@ class TicTacToe: UIViewController {
             self.view.addSubview(playerLabel)
             
             
-            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start]-40-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-            let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[switch]-40-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
-            let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[playerLabel]-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint0 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[start][gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint1 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[switch]-30-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
+            let constraint2 = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[playerLabel][gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
             let constraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[start(50)]-[switch]-[playerLabel(==start)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
             let constraint4 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[gameBoard]-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: self.ticTacToeDictionary)
 

@@ -5,3 +5,39 @@
   Created by Griffin Rades on 11/20/19.
   Copyright © 2019 Saint Mary's University. All rights reserved.
 */
+
+//button to start the tictactoe game
+"buttonLabelStart" = "Start";
+
+"restartTheGame" = "Restart";
+
+//button to clear the calculator
+"clearButton" = "Clear";
+
+//player turn and starting character player indicator
+"startingPlayer" = "Player: X";
+
+//information to the player at the start of a game
+"startingGameInformationLabel" = "The game is Tic-Tac-Toe. Use the switch at the top to decide who goes first, then after that alternate back and forth. The a winner will be decided automaticly when a player has 3 in row, collumn, or diagonal.";
+
+//information durring the game
+"durringGameInformation" = "GAME STARTED! Use the switch to decide who goes first.";
+
+//used to display the winner at the end of a game
+"displayTheWinner" = "The winner is ";
+
+//user to display the game a draw
+"drawText" = "Draw! There are no winners";
+
+//used to tell whos turn it is
+"playerX" = "Player: X";
+
+//used to tell whos turn it is
+"playerO" = "Player: O";
+
+//used to display the player on the board
+"playerXButtonLabel" = "X";
+
+//used to display the player on the board
+"playerOButtonLabel" = "O";
+
