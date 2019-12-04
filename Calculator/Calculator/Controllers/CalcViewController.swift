@@ -28,10 +28,9 @@ class CalcViewController: UIViewController {
      */
     override func loadView() {
         super.loadView()
-        
         let buttonNumbers = [NSLocalizedString("clearButton", comment: "Clear"),"0","1","2","3","4","5","6","7","8","9"] //Array of the number button label names including clear and negate
         let operationButtons = ["X","%","/","+","-",".","=","+/-"] //Array of operation button label names
-        let landScapeButtons = ["(",")","mc","m+","m-","mr","2nd","x^2","x^3","x^y","e^x","2^x","1/x","sqrtX","crtX","YrtX","ln","log","x!","sin","cos","tan","e","EE","Rad","sinh","cosh","tanh","pi","Rans"]
+        let landScapeButtons = ["(",")","mc","m+","m-","mr","2nd","x^2","x^3","x^y","e^x","2^x","1/x","√x","3√x","y√x","ln","log","x!","sin","cos","tan","e","EE","Rad","sinh","cosh","tanh","π","Rans"]
         
         //set up the calculator label
         self.calculatorLabel.backgroundColor = .white
@@ -87,7 +86,7 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.addTarget(self, action: #selector(operationClicked), for: .touchUpInside)
             x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
-            if x.calculatorButton?.titleLabel?.text == "x^2" || x.calculatorButton?.titleLabel?.text == "x^3"  || x.calculatorButton?.titleLabel?.text == "x^3" || x.calculatorButton?.titleLabel?.text == "x^y" || x.calculatorButton?.titleLabel?.text == "2^x" || x.calculatorButton?.titleLabel?.text == "1/x" || x.calculatorButton?.titleLabel?.text == "sqrtX" || x.calculatorButton?.titleLabel?.text == "crtX" || x.calculatorButton?.titleLabel?.text == "YrtX" || x.calculatorButton?.titleLabel?.text == "pi"{
+            if x.calculatorButton?.titleLabel?.text == "x^2" || x.calculatorButton?.titleLabel?.text == "x^3"  || x.calculatorButton?.titleLabel?.text == "x^3" || x.calculatorButton?.titleLabel?.text == "x^y" || x.calculatorButton?.titleLabel?.text == "2^x" || x.calculatorButton?.titleLabel?.text == "1/x" || x.calculatorButton?.titleLabel?.text == "√x" || x.calculatorButton?.titleLabel?.text == "3√x" || x.calculatorButton?.titleLabel?.text == "y√x" || x.calculatorButton?.titleLabel?.text == "π"{
                 x.calculatorButton?.backgroundColor = .red
             }
             
@@ -150,38 +149,54 @@ class CalcViewController: UIViewController {
                 }
             }
             if buttonTitle == "/"{ //if divide
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.calculatorLabel.text = "/"
                 operation = "/"
             }else if buttonTitle == "X"{ //if multiply
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.calculatorLabel.text = "X"
                 operation = "X"
             }else if buttonTitle == "-"{ //if subtract
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.calculatorLabel.text = "-"
                 operation = "-"
             }else if buttonTitle == "+"{ //if add
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.calculatorLabel.text = "+"
                 operation = "+"
             }else if buttonTitle == "%"{ //if percentage skips the = and just does the calculation
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.totalValue = previousScreenNumber / 100
                 self.calculatorLabel.text = String(self.totalValue)
                 operation = "%"
             }else if buttonTitle == "x^2"{
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.totalValue = previousScreenNumber * previousScreenNumber
                 self.calculatorLabel.text = String(self.totalValue)
                 operation = "square"
             }else if buttonTitle == "x^3"{
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.totalValue = previousScreenNumber * previousScreenNumber * previousScreenNumber
                 self.calculatorLabel.text = String(self.totalValue)
                 operation = "cube"
             }else if buttonTitle == "x^y"{
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.calculatorLabel.text = "^"
                 operation = "power"
             }else if buttonTitle == "2^x"{
@@ -192,31 +207,39 @@ class CalcViewController: UIViewController {
                 previousScreenNumber = Double(1.0)
                 self.calculatorLabel.text = "1/"
                 operation = "oneOver"
-            }else if buttonTitle == "pi"{
+            }else if buttonTitle == "π"{
                 self.calculatorLabel.text = "3.14159265359"
-            }else if buttonTitle == "sqrtX"{
+            }else if buttonTitle == "√x"{
                 if  self.calculatorLabel.text != nil {
-                    previousScreenNumber = Double(self.calculatorLabel.text!)!
+                    if let previousNum = Double(self.calculatorLabel.text!){
+                        self.previousScreenNumber = previousNum
+                    }
                     if previousScreenNumber > 0.0{
                         self.totalValue = sqrt(previousScreenNumber)
                         self.calculatorLabel.text = String(self.totalValue)
                     }
                 }
-            }else if buttonTitle == "crtX"{
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
+            }else if buttonTitle == "3√x"{
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 self.totalValue = pow(self.previousScreenNumber, 1/3)
                 self.calculatorLabel.text = String(self.totalValue)
                 
-            }else if buttonTitle == "YrtX"{
-                previousScreenNumber = Double(self.calculatorLabel.text!)!
-                self.calculatorLabel.text = "root"
+            }else if buttonTitle == "y√x"{
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
+                self.calculatorLabel.text = "√"
                 operation = "root"
             }else if buttonTitle == "="{ //if equals
                 /*
                     1: save the current screen text as a double
                     2: do the math accourding to the operation variable
                  */
-                currentScreenNumber = Double(self.calculatorLabel.text!)!
+                if let previousNum = Double(self.calculatorLabel.text!){
+                    self.previousScreenNumber = previousNum
+                }
                 if operation == "/"{ //division
                     if self.currentScreenNumber > 0{
                         self.totalValue = self.previousScreenNumber / self.currentScreenNumber
@@ -229,16 +252,16 @@ class CalcViewController: UIViewController {
                     self.totalValue = self.previousScreenNumber - self.currentScreenNumber
                 }else if operation == "+"{ //addition
                     self.totalValue = self.previousScreenNumber + self.currentScreenNumber
-                }else if operation == "power"{
+                }else if operation == "power"{ //exponent
                     self.totalValue = pow(self.previousScreenNumber, self.currentScreenNumber)
-                }else if operation == "twoPower"{
+                }else if operation == "twoPower"{ //powers of two
                     self.totalValue = pow(self.previousScreenNumber, self.currentScreenNumber)
-                }else if operation == "oneOver"{
+                }else if operation == "oneOver"{ //1/ number
                     self.totalValue = self.previousScreenNumber / self.currentScreenNumber
-                }else if operation == "root"{
+                }else if operation == "root"{ //√ of number
                     self.totalValue = pow(self.previousScreenNumber, 1/self.currentScreenNumber)
                 }
-            //set the calculator label to the value of totalValue
+
                 if flag {
                     self.calculatorLabel.text = "Divide by 0 Error"
                 }else{
@@ -246,7 +269,7 @@ class CalcViewController: UIViewController {
                 }
             
             }else if buttonTitle == "."{ //if decimal point clicked
-                if (self.calculatorLabel.text?.contains("."))!{ //if the label alread is a decimal do nothing
+                if (self.calculatorLabel.text?.contains("."))!{ //if the label alread has a decimal do nothing
                     
                 }else{ //add a decimal point
                     self.calculatorLabel.text! += "."

@@ -262,7 +262,7 @@ class TicTacToe: UIViewController {
     }
     
     /*
-     MARk: Game Screen Constraints
+     MARK: Game Screen Constraints
      Parameter: boolean
      Returns: void
      */
