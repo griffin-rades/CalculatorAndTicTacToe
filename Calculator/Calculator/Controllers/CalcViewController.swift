@@ -122,7 +122,7 @@ class CalcViewController: UIViewController {
                 self.previousScreenNumber = 0.0
                 self.totalValue = 0.0
             }else{ //if the label is a symbol the next input will me a number and remove the symbol
-                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+" || self.calculatorLabel.text == "^" || self.calculatorLabel.text == "2^" || self.calculatorLabel.text == "1/" || self.calculatorLabel.text == "root"{
+                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+" || self.calculatorLabel.text == "^" || self.calculatorLabel.text == "2^" || self.calculatorLabel.text == "1/" || self.calculatorLabel.text == "√"{
                     self.calculatorLabel.text! = buttonTitle
                 }else{ //else just append the number to the last
                     self.calculatorLabel.text! += buttonTitle
@@ -237,8 +237,8 @@ class CalcViewController: UIViewController {
                     1: save the current screen text as a double
                     2: do the math accourding to the operation variable
                  */
-                if let previousNum = Double(self.calculatorLabel.text!){
-                    self.previousScreenNumber = previousNum
+                if let currentNum = Double(self.calculatorLabel.text!){
+                    self.currentScreenNumber =  currentNum
                 }
                 if operation == "/"{ //division
                     if self.currentScreenNumber > 0{
@@ -259,7 +259,7 @@ class CalcViewController: UIViewController {
                 }else if operation == "oneOver"{ //1/ number
                     self.totalValue = self.previousScreenNumber / self.currentScreenNumber
                 }else if operation == "root"{ //√ of number
-                    self.totalValue = pow(self.previousScreenNumber, 1/self.currentScreenNumber)
+                    self.totalValue = pow(self.currentScreenNumber, 1/self.previousScreenNumber)
                 }
 
                 if flag {
