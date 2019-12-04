@@ -6,9 +6,16 @@
   Copyright © 2019 Saint Mary's University. All rights reserved.
 */
 
+//calculator label for the tab bar
+"calculatorTabBarLabel" = "Calculator";
+
+//tic tac toe label for the tab bar
+"tictactoeTabBarLabel" = "Tic-Tac-Toe";
+
 //button to start the tictactoe game
 "buttonLabelStart" = "Start";
 
+//button to restart the game
 "restartTheGame" = "Restart";
 
 //button to clear the calculator

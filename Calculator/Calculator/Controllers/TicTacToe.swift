@@ -66,6 +66,9 @@ class TicTacToe: UIViewController {
         gameScreenConstraints(portrait: true)
     }
     
+    /*
+     MARK: Rotation
+     */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {
@@ -74,7 +77,9 @@ class TicTacToe: UIViewController {
             gameScreenConstraints(portrait: true)
         }
     }
-    
+    /*
+     MARK: create the 9x9 game board.
+     */
     func createGameBoardButtons(){
         for i in 0..<9{
             let x = ticTacToeButtons()
@@ -92,7 +97,11 @@ class TicTacToe: UIViewController {
             self.gameBoardButtons.append(x)
         }
     }
-    
+    /*
+     MARK:Decide winner function
+     Parameter: none
+     Returns: boolean true if there is a winner
+     */
     func decideWinner() -> Bool{
         self.gameBoardFinal.removeAll()
         var p = 0
@@ -110,7 +119,8 @@ class TicTacToe: UIViewController {
             }
             p += 1
         }
-
+        
+        //check the cases of a game winner or a draw
         if (gameBoardFinal[0] == gameBoardFinal[1]) && (gameBoardFinal[1] == gameBoardFinal[2]) && (gameBoardFinal[0] == gameBoardFinal[2]){
             self.informationLabel.text = NSLocalizedString("displayTheWinner", comment: "The winner is ") + gameBoardFinal[0]
             return true
@@ -142,6 +152,12 @@ class TicTacToe: UIViewController {
             return false
         }
     }
+    
+    /*
+     MARK: player slider
+     Parameter: UISwitch
+     Returns: void
+     */
     @objc func playerSlider(_ sender: UISwitch){
         if sender.isOn{
             playerLabel.text = NSLocalizedString("playerO", comment: "Player: O")
@@ -152,6 +168,11 @@ class TicTacToe: UIViewController {
         }
     }
     
+    /*
+     MARK: Game Button Clicked
+     Parameter: UIButton
+     Returns: void
+     */
     @objc func gameButtonClicked(_ sender: UIButton){
         if gameStarted && !isWinner{
             changeLabel(player: playerTurnX, whichButton: sender.tag)
@@ -168,6 +189,11 @@ class TicTacToe: UIViewController {
         }
     }
     
+    /*
+     MARK: Start clicked
+     Parameter: UIButton
+     Returns: void
+     */
     @objc func startButtonClicked(_ sender: UIButton){
         self.gameStarted = true
         self.isWinner = false
@@ -186,6 +212,11 @@ class TicTacToe: UIViewController {
         }
     }
     
+    /*
+     MARK: Change the label
+     Parameter: boolean true is player x and an interger to see what button was clicked
+     Returns: void
+     */
     func changeLabel(player: Bool, whichButton: Int){
         if player{
             gameBoardButtons[whichButton].buttonLabel = NSLocalizedString("playerXButtonLabel", comment: "X")
@@ -198,6 +229,11 @@ class TicTacToe: UIViewController {
         }
     }
     
+    /*
+     MARK: Game Board Constraints
+     Parameter: none
+     Retuns: void
+     */
     func gameBoardConstraints(){
         self.informationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.gameBoardView.addSubview(informationLabel)
@@ -225,6 +261,11 @@ class TicTacToe: UIViewController {
         self.gameBoardView.addConstraints(constraint6)
     }
     
+    /*
+     MARk: Game Screen Constraints
+     Parameter: boolean
+     Returns: void
+     */
     func gameScreenConstraints(portrait: Bool){
         self.xOrO.removeFromSuperview()
         self.gameBoardView.removeFromSuperview()
