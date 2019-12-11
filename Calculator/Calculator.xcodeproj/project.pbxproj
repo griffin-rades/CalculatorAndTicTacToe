@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		741562E42381DEA7003A667A /* ticTacToeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741562E32381DEA7003A667A /* ticTacToeButtons.swift */; };
-		7489B6D1238602EC007C3409 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7489B6D0238602EC007C3409 /* Localizable.strings */; };
+		745806B823A07EFD005BCB1D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745806BA23A07EFD005BCB1D /* Localizable.strings */; };
 		74BA8DE42363776C00D9CD46 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE32363776C00D9CD46 /* TabBarController.swift */; };
 		74BA8DE82363816400D9CD46 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE72363816400D9CD46 /* TicTacToe.swift */; };
 		74BCA5E023692795009A4595 /* CalcButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BCA5DF23692795009A4595 /* CalcButtons.swift */; };
@@ -22,7 +22,9 @@
 
 /* Begin PBXFileReference section */
 		741562E32381DEA7003A667A /* ticTacToeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ticTacToeButtons.swift; sourceTree = "<group>"; };
-		7489B6D0238602EC007C3409 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		745806B923A07EFD005BCB1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		745806BB23A07F1A005BCB1D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		745806BC23A07F1A005BCB1D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7489B6D3238604CA007C3409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74BA8DE32363776C00D9CD46 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		74BA8DE72363816400D9CD46 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
@@ -85,7 +87,7 @@
 		74BE9CA12360F0D600976304 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				7489B6D0238602EC007C3409 /* Localizable.strings */,
+				745806BA23A07EFD005BCB1D /* Localizable.strings */,
 				74BCA5DF23692795009A4595 /* CalcButtons.swift */,
 				741562E32381DEA7003A667A /* ticTacToeButtons.swift */,
 				74BA8DE52363779600D9CD46 /* Delegates */,
@@ -140,6 +142,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 74BE9C962360F0D600976304;
 			productRefGroup = 74BE9CA02360F0D600976304 /* Products */;
@@ -157,7 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74BE9CB22360F0D900976304 /* LaunchScreen.storyboard in Resources */,
-				7489B6D1238602EC007C3409 /* Localizable.strings in Resources */,
+				745806B823A07EFD005BCB1D /* Localizable.strings in Resources */,
 				74BE9CAF2360F0D900976304 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,10 +186,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		745806BA23A07EFD005BCB1D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				745806B923A07EFD005BCB1D /* en */,
+				745806BC23A07F1A005BCB1D /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		74BE9CB02360F0D900976304 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7489B6D3238604CA007C3409 /* Base */,
+				745806BB23A07F1A005BCB1D /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -198,6 +211,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -258,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

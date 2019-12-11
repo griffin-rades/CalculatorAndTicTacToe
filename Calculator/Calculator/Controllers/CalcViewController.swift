@@ -53,12 +53,16 @@ class CalcViewController: UIViewController {
             x.calculatorButton?.addTarget(self, action: #selector(numberClicked), for: .touchUpInside)
             x.calculatorButton?.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             
-            if x.calculatorButton?.titleLabel?.text == "Clear"{
+            if x.calculatorButton?.titleLabel?.text == "Clear" || x.calculatorButton?.titleLabel?.text == "清除"{
                 x.calculatorButton?.backgroundColor = .blue
             }
             
             self.calculatorButtonsArray.append(x)
-            self.buttonDictionary[x.title!] = x.calculatorButton
+            if x.calculatorButton?.titleLabel?.text == "清除"{
+                self.buttonDictionary["nClear"] = x.calculatorButton
+            }else{
+                self.buttonDictionary[x.title!] = x.calculatorButton
+            }
         }
         //create array of calculator buttons (operations) and add to them to a dictonary of the buttons Key:"String" Value:UIButton
         for i in 0..<operationButtons.count{
@@ -116,7 +120,7 @@ class CalcViewController: UIViewController {
      */
     @objc func numberClicked(_ sender: UIButton){
         if let buttonTitle = sender.titleLabel?.text{ //unwrap the button title label
-            if buttonTitle == "Clear"{ //if clear...
+            if buttonTitle == "Clear" || buttonTitle == "清除"{ //if clear...
                 self.calculatorLabel.text = ""
                 self.currentScreenNumber = 0.0
                 self.previousScreenNumber = 0.0

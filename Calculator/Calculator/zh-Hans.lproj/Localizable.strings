@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  Calculator
+
+  Created by Griffin Rades on 11/20/19.
+  Copyright © 2019 Saint Mary's University. All rights reserved.
+*/
+
+//calculator label for the tab bar
+"calculatorTabBarLabel" = "计算器";
+
+//tic tac toe label for the tab bar
+"tictactoeTabBarLabel" = "井字棋";
+
+//button to start the tictactoe game
+"buttonLabelStart" = "开始";
+
+//button to restart the game
+"restartTheGame" = "重制";
+
+//button to clear the calculator
+"clearButton" = "清除";
+
+//player turn and starting character player indicator
+"startingPlayer" = "玩家: X";
+
+//information to the player at the start of a game
+"startingGameInformationLabel" = "这是一个井字棋游戏，使用开关决定谁先走，x先走，o后走，率先将自己的棋子连成3个，不论数列，自动取胜";
+
+//information durring the game
+"durringGameInformation" = "游戏开始，使用开关决定谁先走";
+
+//used to display the winner at the end of a game
+"displayTheWinner" = "胜者是 ";
+
+//user to display the game a draw
+"drawText" = "胜者是";
+
+//used to tell whos turn it is
+"playerX" = "玩家: X";
+
+//used to tell whos turn it is
+"playerO" = "玩家: O";
+
+//used to display the player on the board
+"playerXButtonLabel" = "X";
+
+//used to display the player on the board
+"playerOButtonLabel" = "O";
+
