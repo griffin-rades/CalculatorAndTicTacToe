@@ -126,7 +126,7 @@ class CalcViewController: UIViewController {
                 self.previousScreenNumber = 0.0
                 self.totalValue = 0.0
             }else{ //if the label is a symbol the next input will me a number and remove the symbol
-                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+" || self.calculatorLabel.text == "^" || self.calculatorLabel.text == "2^" || self.calculatorLabel.text == "1/" || self.calculatorLabel.text == "√"{
+                if self.calculatorLabel.text == "/" || self.calculatorLabel.text == "X" || self.calculatorLabel.text == "-" || self.calculatorLabel.text == "+" || self.calculatorLabel.text == "^" || self.calculatorLabel.text == "2^" || self.calculatorLabel.text == "1/" || self.calculatorLabel.text == "√" || self.calculatorLabel.text == "."{
                     self.calculatorLabel.text! = buttonTitle
                 }else{ //else just append the number to the last
                     self.calculatorLabel.text! += buttonTitle

@@ -1,0 +1,9 @@
+/*
+  InfoPlist.strings
+  Calculator
+
+  Created by Griffin Rades on 12/10/19.
+  Copyright © 2019 Saint Mary's University. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "测试工程";

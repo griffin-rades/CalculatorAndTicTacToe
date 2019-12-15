@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		741562E42381DEA7003A667A /* ticTacToeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741562E32381DEA7003A667A /* ticTacToeButtons.swift */; };
 		745806B823A07EFD005BCB1D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745806BA23A07EFD005BCB1D /* Localizable.strings */; };
+		745806BF23A08685005BCB1D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745806C123A08685005BCB1D /* InfoPlist.strings */; };
 		74BA8DE42363776C00D9CD46 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE32363776C00D9CD46 /* TabBarController.swift */; };
 		74BA8DE82363816400D9CD46 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA8DE72363816400D9CD46 /* TicTacToe.swift */; };
 		74BCA5E023692795009A4595 /* CalcButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BCA5DF23692795009A4595 /* CalcButtons.swift */; };
@@ -25,6 +26,8 @@
 		745806B923A07EFD005BCB1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		745806BB23A07F1A005BCB1D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		745806BC23A07F1A005BCB1D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		745806C023A08685005BCB1D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		745806C223A08688005BCB1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7489B6D3238604CA007C3409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74BA8DE32363776C00D9CD46 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		74BA8DE72363816400D9CD46 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				745806BA23A07EFD005BCB1D /* Localizable.strings */,
+				745806C123A08685005BCB1D /* InfoPlist.strings */,
 				74BCA5DF23692795009A4595 /* CalcButtons.swift */,
 				741562E32381DEA7003A667A /* ticTacToeButtons.swift */,
 				74BA8DE52363779600D9CD46 /* Delegates */,
@@ -160,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74BE9CB22360F0D900976304 /* LaunchScreen.storyboard in Resources */,
+				745806BF23A08685005BCB1D /* InfoPlist.strings in Resources */,
 				745806B823A07EFD005BCB1D /* Localizable.strings in Resources */,
 				74BE9CAF2360F0D900976304 /* Assets.xcassets in Resources */,
 			);
@@ -193,6 +198,15 @@
 				745806BC23A07F1A005BCB1D /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		745806C123A08685005BCB1D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				745806C023A08685005BCB1D /* zh-Hans */,
+				745806C223A08688005BCB1D /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		74BE9CB02360F0D900976304 /* LaunchScreen.storyboard */ = {
